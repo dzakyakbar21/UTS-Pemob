@@ -6,42 +6,66 @@ class QuizProvider with ChangeNotifier {
   bool _isFinished = false;
   String _userName = '';
 
-  // Simpan pilihan user per-pertanyaan (null artinya belum memilih)
   final List<int?> _selected = List<int?>.filled(techQuestions.length, null);
 
-  // ===== Getters =====
   int get currentIndex => _currentIndex;
   bool get isFinished => _isFinished;
   String get userName => _userName;
-  Question get currentQuestion => techQuestions[_currentIndex];
   int get totalQuestions => techQuestions.length;
 
-  List<int?> get selectedAll => _selected;
+  Question get currentQuestion => techQuestions[_currentIndex];
   int? get selectedForCurrent => _selected[_currentIndex];
-  int get correctIndexForCurrent => currentQuestion.correctIndex;
+  List<int?> get selectedAll => _selected;
 
   int get score {
     int s = 0;
     for (int i = 0; i < totalQuestions; i++) {
-      final sel = _selected[i];
-      if (sel != null && sel == techQuestions[i].correctIndex) s++;
+      if (_selected[i] != null && _selected[i] == techQuestions[i].correctIndex) s++;
     }
     return s;
   }
 
-  // ===== Setters / actions =====
+  // === Tambahan utility ===
+  List<int> get unansweredIndices {
+    final list = <int>[];
+    for (int i = 0; i < totalQuestions; i++) {
+      if (_selected[i] == null) list.add(i);
+    }
+    return list;
+  }
+
+  bool get allAnswered => unansweredIndices.isEmpty;
+
+  int? get firstUnansweredIndex {
+    for (int i = 0; i < totalQuestions; i++) {
+      if (_selected[i] == null) return i;
+    }
+    return null;
+  }
+
+  void goTo(int index) {
+    if (index < 0 || index >= totalQuestions) return;
+    _currentIndex = index;
+    _isFinished = false;
+    notifyListeners();
+  }
+
+  void finish() {
+    _isFinished = true;
+    notifyListeners();
+  }
+  // =========================
+
   void setUserName(String name) {
     _userName = name;
     notifyListeners();
   }
 
-  // memilih opsi TAPI tidak otomatis pindah
   void select(int optionIndex) {
     _selected[_currentIndex] = optionIndex;
     notifyListeners();
   }
 
-  // navigasi
   void next() {
     if (_currentIndex < totalQuestions - 1) {
       _currentIndex++;
@@ -59,15 +83,6 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // helper untuk teks jawaban
-  String? get userAnswerText {
-    final sel = selectedForCurrent;
-    if (sel == null) return null;
-    return currentQuestion.options[sel];
-    }
-  String get correctAnswerText => currentQuestion.options[correctIndexForCurrent];
-
-  // reset full sesi
   void resetQuiz() {
     _currentIndex = 0;
     _isFinished = false;
