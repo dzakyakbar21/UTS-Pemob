@@ -29,15 +29,13 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             themeMode: themeProv.mode,
 
-            // ⛔️ JANGAN pakai `home:` di sini
-            // ✅ Pakai initialRoute + routes agar Splash SELALU jadi rute pertama
+            
             initialRoute: '/splash',
             routes: {
               '/splash': (_) => const SplashPage(),
               '/home':   (_) => const HomePage(),
             },
 
-            // (opsional) cegah route lain jadi default
             onUnknownRoute: (_) => MaterialPageRoute(builder: (_) => const SplashPage()),
           );
         },

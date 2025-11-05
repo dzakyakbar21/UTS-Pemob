@@ -1,5 +1,6 @@
-name: utslab
-description: A technology-themed quiz app for UTS Lab.
+name: uts_pemob_quiz
+description: Kuis Aplikasi Teknologi
+version: 1.0.1+2
 
 environment:
   sdk: '^3.9.0'
@@ -16,3 +17,5 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+ 
