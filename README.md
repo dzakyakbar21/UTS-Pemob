@@ -1,16 +1,10 @@
-# uts_lab
+Nama   : Muhammad Dzaky Aulia Akbar
+NIM    : 231401128
+Lab    : 3
 
-A new Flutter project.
+Deskripsi Aplikasi : Tech Quiz
 
-## Getting Started
+Credit : https://fonts.google.com/specimen/Poppins
+         https://api.flutter.dev/flutter/material/Icons-class.html
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Figma : https://www.figma.com/design/ZPyJgmg4QiBSWdYrRsWglt/UTS-Pemob?node-id=2-48&t=6mQVqW9zDsCAro05-1
